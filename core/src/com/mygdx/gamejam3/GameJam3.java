@@ -8,28 +8,27 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class GameJam3 extends Game
 {
-	Texture img;
 	GEngine eng;
-	TextureMap tm;
 	
 	@Override
 	public void create () {
 		eng = new GEngine();
-		img = new Texture("badlogic.jpg");
+		Texture img = new Texture("badlogic.jpg");
+		Entity e = new Entity();
+		e.add(new PositionComponent(0,0)).add(new DisplayComponent(img));
+		eng.addEntity(e);
 	}
 
 	@Override
 	public void render () 
 	{
-		
-		
 		eng.update(Gdx.graphics.getDeltaTime());
 	}
 	
 	@Override
-	public void dispose () {
+	public void dispose ()
+	{
 		eng.dispose();
-		img.dispose();
 	}
 
 
