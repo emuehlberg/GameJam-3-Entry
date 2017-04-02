@@ -31,9 +31,11 @@ public class MovementSystem extends EntitySystem
 			
 			pc.x += vc.vx;
 			pc.y += vc.vy;
-			cc.x = pc.x;
-			cc.y = pc.y;
+			if(cc!=null)
+			{				
+				cc.x = pc.x;
+				cc.y = pc.y;
+			}
 		}
 	}
-
 }

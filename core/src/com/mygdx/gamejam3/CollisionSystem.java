@@ -22,42 +22,22 @@ public class CollisionSystem extends EntitySystem
 		entities = engine.getEntitiesFor(Family.all(VelocityComponent.class,CollisionComponent.class).get());
 	}
 	
-	public void update(float deltaTime)
+	/**
+	 * Checks the collision of basic bounding boxes
+	 * @param e1 Entity 1 collision component
+	 * @param e2 Entity 2 collision component
+	 * @return returns true if collision
+	 */
+	public boolean collide(CollisionComponent e1, CollisionComponent e2)
 	{
-		for(int x = 0; x<entities.size();x++)
-		{
-			Entity e1 = entities.get(x);
-			VelocityComponent vc = e1.getComponent(VelocityComponent.class);
-			if((vc.vx != 0 || vc.vy != 0) && vc != null)
-			{
-				CollisionComponent cc1 = cm.get(e1);
-				
-				for(int i = 0; i < sentities.size(); i++)
-				{
-					Entity e2 = sentities.get(i);
-					
-					if(!e1.equals(e2))
-					{						
-						CollisionComponent cc2 = cm.get(e2);
-						
-						if(cc1.x+cc1.w < cc2.x || cc1.x > cc2.x+cc2.w)
-						{
-							System.out.println("Collision - Player:"+cc1.x+"x"+cc1.y+"y/"+cc1.w+"x"+cc1.h+" Object:"+cc2.x+"x"+cc2.y+"y/"+cc2.w+"x"+cc2.h);	
-							vc.vx = 0;
-							continue;
-						}
-						if(cc1.y+cc1.h < cc2.y || cc1.y > cc2.y+cc2.h)
-						{
-							System.out.println("Collision - Player:"+cc1.x+"x"+cc1.y+"y/"+cc1.w+"x"+cc1.h+" Object:"+cc2.x+"x"+cc2.y+"y/"+cc2.w+"x"+cc2.h);
-							vc.vy = 0;
-							continue;
-						}
-						
-					}
-				}				
-			}
-
-		}
+		//Find Centers
+		float cx1 = e1.x+(e1.w/2);
+		float cy1 = e1.y+(e1.h/2);
+		float cx2 = e2.x+(e2.w/2);
+		float cy2 = e2.y+(e2.h/2);
 		
+		
+		return true;
 	}
+
 }

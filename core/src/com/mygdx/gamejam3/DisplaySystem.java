@@ -42,8 +42,6 @@ public class DisplaySystem extends EntitySystem
 			eng.batch.draw(dc.getTexture(), pc.x, pc.y);
 		}
 		eng.batch.end();
-		PositionComponent pc = eng.Player.getComponent(PositionComponent.class);
-		eng.camera.position.set(pc.x,pc.y,0);
 	}
 	
 }
