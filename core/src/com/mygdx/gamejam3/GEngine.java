@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class GEngine
 {
+	private EngineDebugger dbgr = new EngineDebugger();
 	public Engine engine;
 	public OrthographicCamera camera;
 	public SpriteBatch batch;
@@ -58,6 +59,15 @@ public class GEngine
 	public void printVars()
 	{
 		System.out.println("Last ID: "+NextID);
+		for(Entity e:engine.getEntities())
+		{
+			IDComponent id = e.getComponent(IDComponent.class);
+			System.out.println("Entity: "+id.ID);
+			for(Component c:e.getComponents())
+			{
+				dbgr.Inspect(c);
+			}
+		}
 	}
 	
 	public void dispose()

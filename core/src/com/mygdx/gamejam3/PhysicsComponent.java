@@ -1,14 +1,16 @@
 package com.mygdx.gamejam3;
 
-public class PhysicsComponent
-{
-	public double VX;
-	public double VY;
+import com.badlogic.ashley.core.Component;
 
-	public PhysicsComponent(double vx, double vy)
+public class PhysicsComponent implements Component
+{
+	public float ax;
+	public float ay;
+
+	public PhysicsComponent(float ax, float ay)
 	{
-		VX = vx;
-		VY = vy;
+		this.ax = ax;
+		this.ay = ay;
 	}
 
 }

@@ -11,6 +11,11 @@ public class CollisionSystem extends EntitySystem
 {
 	private ImmutableArray<Entity> entities;
 	private ImmutableArray<Entity> sentities;
+
+	public static final int TOP = 1;
+	public static final int BOTTOM = 2;
+	public static final int LEFT = 4;
+	public static final int RIGHT = 8;
 	
 	private ComponentMapper<CollisionComponent> cm = ComponentMapper.getFor(CollisionComponent.class);
 	
@@ -18,26 +23,89 @@ public class CollisionSystem extends EntitySystem
 	
 	public void addedToEngine(Engine engine)
 	{
-		sentities = engine.getEntitiesFor(Family.all(CollisionComponent.class).get());
 		entities = engine.getEntitiesFor(Family.all(VelocityComponent.class,CollisionComponent.class).get());
+		sentities = engine.getEntitiesFor(Family.all(CollisionComponent.class).get());
 	}
 	
-	/**
-	 * Checks the collision of basic bounding boxes
-	 * @param e1 Entity 1 collision component
-	 * @param e2 Entity 2 collision component
-	 * @return returns true if collision
-	 */
-	public boolean collide(CollisionComponent e1, CollisionComponent e2)
+	public void update(float deltatime)
 	{
-		//Find Centers
-		float cx1 = e1.x+(e1.w/2);
-		float cy1 = e1.y+(e1.h/2);
-		float cx2 = e2.x+(e2.w/2);
-		float cy2 = e2.y+(e2.h/2);
-		
+		for(Entity a:entities)
+		{
+			CollisionComponent ac = a.getComponent(CollisionComponent.class);
+			IDComponent ida = a.getComponent(IDComponent.class);
+			PositionComponent pc = a.getComponent(PositionComponent.class);
+			for(Entity b:sentities)
+			{
+				if(!a.equals(b))
+				{					
+					IDComponent idb = b.getComponent(IDComponent.class);
+					CollisionComponent bc = b.getComponent(CollisionComponent.class);
+					if(collide(ac,bc))
+					{
+						switch(collisionDirection(ac,bc))
+						{
+						case BOTTOM:
+							pc.y = bc.y - ac.h - 1;
+							ac.y = pc.y;
+							break;
+						case TOP:
+							pc.y = bc.y + bc.h + 1;
+							ac.y = pc.y;					
+							break;
+						case RIGHT:
+							pc.x = bc.x + bc.w + 1;
+							ac.x = pc.x;
+							break;
+						case LEFT:
+							pc.x = bc.x - ac.w - 1;
+							ac.x = pc.x;
+							break;
+							
+						}
+						
+					}
+				}
+			}
+		}
+	}
+	
+	public boolean collide(CollisionComponent a, CollisionComponent b)
+	{
+		if(a.x>b.x+b.w || a.x+a.w<b.x)
+			return false;
+		if(a.y>b.y+b.h || a.y+a.h<b.y)
+			return false;
 		
 		return true;
 	}
-
+	
+	public int collisionDirection(CollisionComponent a, CollisionComponent b)
+	{
+		float x = (a.x+(a.w/2)) - (b.x+(b.w/2));
+		float y = (a.y+(a.h/2)) - (b.y+(b.h/2));
+		
+		if(Math.abs(x)>Math.abs(y))
+		{
+			if(x > 0)
+			{
+				return RIGHT;
+			}
+			else
+			{
+				return LEFT;
+			}
+		}
+		else
+		{
+			if(y > 0)
+			{
+				return TOP;
+			}
+			else
+			{
+				return BOTTOM;
+			}
+		}
+	}
+	
 }
