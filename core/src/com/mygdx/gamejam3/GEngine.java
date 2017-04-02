@@ -25,8 +25,8 @@ public class GEngine
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false);
 		engine.addSystem(new MovementSystem());
-		engine.addSystem(new CollisionSystem());
 		engine.addSystem(new PhysicsSystem());
+		engine.addSystem(new CollisionSystem());
 		engine.addSystem(new DisplaySystem(this)); //Keep this system last
 		System.out.println("-Engine Initialized-");
 	}

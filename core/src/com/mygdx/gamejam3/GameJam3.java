@@ -19,11 +19,11 @@ public class GameJam3 extends ApplicationAdapter
 		eng = new GEngine();
 		Texture img = new Texture("player.png");
 		Entity e = new Entity();
-		e.add(new PositionComponent(200,200)).add(new DisplayComponent(img)).add(new VelocityComponent(0,0)).add(new CollisionComponent(0,0,24,24)).add(new PhysicsComponent(0,-5));
+		e.add(new PositionComponent(200,200)).add(new DisplayComponent(img)).add(new VelocityComponent(0,0)).add(new CollisionComponent(0,0,24,24)).add(new PhysicsComponent(0,-10));
 		eng.addEntity(e);
 		Player = e;
 		Entity e2;
-		for(int x = 0; x<100; x++)
+		for(int x = 0; x<20; x++)
 		{			
 			e2 = new Entity();
 			e2.add(new PositionComponent(16*x,0)).add(new DisplayComponent(new Texture("tile.png"))).add(new CollisionComponent(16*x,0,16,16));

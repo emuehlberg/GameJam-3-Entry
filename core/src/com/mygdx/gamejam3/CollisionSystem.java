@@ -46,20 +46,20 @@ public class CollisionSystem extends EntitySystem
 						switch(collisionDirection(ac,bc))
 						{
 						case BOTTOM:
-							pc.y = bc.y - ac.h - 1;
+							pc.y = bc.y - ac.h;
 							ac.y = pc.y;
-							vc.vy = 0;
 							break;
 						case TOP:
-							pc.y = bc.y + bc.h + 1;
-							ac.y = pc.y;					
+							pc.y = bc.y + bc.h;
+							ac.y = pc.y;				
+							vc.vy = 0;
 							break;
 						case RIGHT:
-							pc.x = bc.x + bc.w + 1;
+							pc.x = bc.x + bc.w;
 							ac.x = pc.x;
 							break;
 						case LEFT:
-							pc.x = bc.x - ac.w - 1;
+							pc.x = bc.x - ac.w;
 							ac.x = pc.x;
 							break;
 							
