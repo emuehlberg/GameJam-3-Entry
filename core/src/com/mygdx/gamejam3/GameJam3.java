@@ -48,8 +48,7 @@ public class GameJam3 extends ApplicationAdapter
 			vc.vy=ms;
 		else if(Gdx.input.isKeyPressed(Keys.DOWN))
 			vc.vy=-ms;
-		else
-			vc.vy=0;
+
 		
 		if(Gdx.input.isKeyJustPressed(Keys.PLUS))
 			ms+=2.5;

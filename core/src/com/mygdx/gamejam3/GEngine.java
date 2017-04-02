@@ -15,8 +15,6 @@ public class GEngine
 	public OrthographicCamera camera;
 	public SpriteBatch batch;
 	private int NextID;
-	public LinkedList<Entity> NPCs;
-	public Entity Player;
 	
 	public GEngine()
 	{
@@ -28,8 +26,8 @@ public class GEngine
 		camera.setToOrtho(false);
 		engine.addSystem(new MovementSystem());
 		engine.addSystem(new CollisionSystem());
+		engine.addSystem(new PhysicsSystem());
 		engine.addSystem(new DisplaySystem(this)); //Keep this system last
-		NPCs = new LinkedList<Entity>();
 		System.out.println("-Engine Initialized-");
 	}
 

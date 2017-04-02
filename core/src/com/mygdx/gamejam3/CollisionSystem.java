@@ -34,6 +34,7 @@ public class CollisionSystem extends EntitySystem
 			CollisionComponent ac = a.getComponent(CollisionComponent.class);
 			IDComponent ida = a.getComponent(IDComponent.class);
 			PositionComponent pc = a.getComponent(PositionComponent.class);
+			VelocityComponent vc = a.getComponent(VelocityComponent.class);
 			for(Entity b:sentities)
 			{
 				if(!a.equals(b))
@@ -47,6 +48,7 @@ public class CollisionSystem extends EntitySystem
 						case BOTTOM:
 							pc.y = bc.y - ac.h - 1;
 							ac.y = pc.y;
+							vc.vy = 0;
 							break;
 						case TOP:
 							pc.y = bc.y + bc.h + 1;
