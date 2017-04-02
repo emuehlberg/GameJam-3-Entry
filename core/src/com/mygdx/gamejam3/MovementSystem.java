@@ -6,6 +6,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.mygdx.gamejam3.enums.Facing;
 
 public class MovementSystem extends EntitySystem
 {
@@ -28,9 +29,33 @@ public class MovementSystem extends EntitySystem
 			VelocityComponent vc = vm.get(e);
 			PositionComponent pc = pm.get(e);
 			CollisionComponent cc = e.getComponent(CollisionComponent.class);
+			StateComponent sc = e.getComponent(StateComponent.class);
 			
+			if(sc!=null)
+			{
+				if(sc.state.Moving)			
+				{
+					if(sc.state.facing==Facing.Left)
+					{
+						vc.vx-=1f;
+						if(vc.vx<-3f)
+							vc.vx=-3f;
+					}
+					if(sc.state.facing==Facing.Right)
+					{
+						vc.vx+=1f;
+						if(vc.vx>3f)
+							vc.vx=3f;
+					}
+				}
+				else
+					vc.vx=0;
+			}
+		
 			pc.x += vc.vx;
 			pc.y += vc.vy;
+
+			
 			if(cc!=null)
 			{				
 				cc.x = pc.x;

@@ -15,6 +15,7 @@ public class GEngine
 	public OrthographicCamera camera;
 	public SpriteBatch batch;
 	private int NextID;
+	public JamCam jamcam;
 	
 	public GEngine()
 	{
@@ -24,6 +25,7 @@ public class GEngine
 		engine = new Engine();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false);
+		jamcam = new JamCam(camera);
 		engine.addSystem(new MovementSystem());
 		engine.addSystem(new PhysicsSystem());
 		engine.addSystem(new CollisionSystem());
@@ -34,7 +36,7 @@ public class GEngine
 	public void update(float deltaTime)
 	{
 		engine.update(deltaTime);
-		camera.update();
+		jamcam.update();
 	}
 	
 	private int getNextID()
@@ -60,9 +62,12 @@ public class GEngine
 		for(Entity e:engine.getEntities())
 		{
 			IDComponent id = e.getComponent(IDComponent.class);
+			if(id.ID!=1)
+				continue;
 			System.out.println("Entity: "+id.ID);
 			for(Component c:e.getComponents())
 			{
+				
 				dbgr.Inspect(c);
 			}
 		}

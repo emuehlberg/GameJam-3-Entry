@@ -9,6 +9,7 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.gamejam3.enums.Facing;
 
 public class DisplaySystem extends EntitySystem
 {
@@ -39,6 +40,18 @@ public class DisplaySystem extends EntitySystem
 		{
 			PositionComponent pc = pm.get(e);
 			DisplayComponent dc = dm.get(e);
+			StateComponent sc = e.getComponent(StateComponent.class);
+			if(sc!=null)
+			{
+				if(sc.state.facing==Facing.Right)
+				{
+					dc.texreg.flip(true, false);
+				}
+				else
+				{
+					
+				}
+			}
 			eng.batch.draw(dc.getTexture(), pc.x, pc.y);
 		}
 		eng.batch.end();
