@@ -16,6 +16,7 @@ public class GEngine
 	public SpriteBatch batch;
 	private int NextID;
 	public JamCam jamcam;
+	public ScreenWriter sw;
 	
 	public GEngine()
 	{
@@ -30,13 +31,14 @@ public class GEngine
 		engine.addSystem(new PhysicsSystem());
 		engine.addSystem(new CollisionSystem());
 		engine.addSystem(new DisplaySystem(this)); //Keep this system last
+		sw = new ScreenWriter(batch);
 		System.out.println("-Engine Initialized-");
 	}
 
 	public void update(float deltaTime)
 	{
 		engine.update(deltaTime);
-		jamcam.update();
+		camera.update();
 	}
 	
 	private int getNextID()
@@ -71,6 +73,13 @@ public class GEngine
 				dbgr.Inspect(c);
 			}
 		}
+	}
+	
+	public void dispose(Entity e)
+	{
+		engine.removeEntity(e);
+		DisplayComponent dc = e.getComponent(DisplayComponent.class);
+		dc.texreg.getTexture().dispose();
 	}
 	
 	public void dispose()
