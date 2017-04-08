@@ -2,6 +2,7 @@ package com.mygdx.gamejam3;
 
 import java.util.Random;
 
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
@@ -127,6 +128,13 @@ public class GameJam3 extends ApplicationAdapter
 			System.out.println("NEW HEIGHT: "+height);
 			generatePlatforms(layer);
 			layer+=4;
+		}
+		
+		if(Gdx.input.isKeyJustPressed(Keys.F1))
+		{
+			Entity e = new Entity();
+			e.add(new TimedComponent(10)).add(new PositionComponent(100,100)).add(new TextComponent("Test",100));
+			eng.addEntity(e);
 		}
 			
 		eng.update(Gdx.graphics.getDeltaTime());

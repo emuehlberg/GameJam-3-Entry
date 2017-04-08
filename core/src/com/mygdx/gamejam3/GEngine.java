@@ -27,6 +27,7 @@ public class GEngine
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false);
 		jamcam = new JamCam(camera);
+		engine.addSystem(new TimedSystem(this));
 		engine.addSystem(new MovementSystem());
 		engine.addSystem(new PhysicsSystem());
 		engine.addSystem(new CollisionSystem());
@@ -75,11 +76,19 @@ public class GEngine
 		}
 	}
 	
+	public void WriteScreen(String text, float x, float y, float width)
+	{
+		Entity e = new Entity();
+		e.add(new PositionComponent(x,y)).add(new TextComponent(text, width));
+		this.addEntity(e);
+	}
+	
 	public void dispose(Entity e)
 	{
 		engine.removeEntity(e);
 		DisplayComponent dc = e.getComponent(DisplayComponent.class);
-		dc.texreg.getTexture().dispose();
+		if(dc != null)
+			dc.texreg.getTexture().dispose();
 	}
 	
 	public void dispose()

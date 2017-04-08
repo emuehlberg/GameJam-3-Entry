@@ -1,5 +1,7 @@
 package com.mygdx.gamejam3;
 
+import java.util.LinkedList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -17,8 +19,11 @@ public class ScreenWriter
 	public SpriteBatch batch;
 	public int alignment;
 	
+	public LinkedList<TextBox> texts;
+	
 	public ScreenWriter(String filename, SpriteBatch batch)
 	{
+		texts = new LinkedList<TextBox>();
 		ttf = new FreeTypeFontGenerator(Gdx.files.internal(filename));
 		fp = new FreeTypeFontParameter();
 		this.batch = batch;
@@ -27,6 +32,7 @@ public class ScreenWriter
 	
 	public ScreenWriter(SpriteBatch batch)
 	{
+		texts = new LinkedList<TextBox>();
 		this.batch = batch;
 		alignment = Align.topLeft;
 	}
@@ -50,12 +56,14 @@ public class ScreenWriter
 		this.c = c;
 	}
 	
-	public void writeScreen(String text, float x, float y, int start, int end, float width)
+	public void writeScreen(TextBox b)
 	{
-		batch.begin();
-		font.setColor(c);
-		font.draw(batch, text, x, y, start, end, width, alignment, true);
-		batch.end();
+	}
+	
+	public void update()
+	{
+
+		
 	}
 	
 	public void dispose()
