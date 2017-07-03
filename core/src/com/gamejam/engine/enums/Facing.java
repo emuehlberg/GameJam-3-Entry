@@ -1,4 +1,4 @@
-package com.mygdx.gamejam3.enums;
+package com.gamejam.engine.enums;
 
 public enum Facing
 {

@@ -1,6 +1,6 @@
-package com.mygdx.gamejam3;
+package com.gamejam.engine;
 
-import com.mygdx.gamejam3.enums.Facing;
+import com.gamejam.engine.enums.Facing;
 
 public class State
 {

@@ -1,4 +1,4 @@
-package com.mygdx.gamejam3;
+package com.gamejam.engine;
 
 import java.util.LinkedList;
 

@@ -1,4 +1,4 @@
-package com.mygdx.gamejam3;
+package com.gamejam.minijam1;
 
 import java.util.Random;
 
@@ -11,7 +11,16 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.ai.GdxLogger;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.mygdx.gamejam3.enums.Facing;
+import com.gamejam.engine.CollisionComponent;
+import com.gamejam.engine.DisplayComponent;
+import com.gamejam.engine.GEngine;
+import com.gamejam.engine.PhysicsComponent;
+import com.gamejam.engine.PositionComponent;
+import com.gamejam.engine.StateComponent;
+import com.gamejam.engine.TextComponent;
+import com.gamejam.engine.TimedComponent;
+import com.gamejam.engine.VelocityComponent;
+import com.gamejam.engine.enums.Facing;
 
 public class GameJam3 extends ApplicationAdapter
 {

@@ -1,4 +1,4 @@
-package com.mygdx.gamejam3;
+package com.gamejam.engine;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.graphics.Color;

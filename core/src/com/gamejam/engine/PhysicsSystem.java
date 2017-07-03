@@ -1,4 +1,4 @@
-package com.mygdx.gamejam3;
+package com.gamejam.engine;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Engine;
@@ -7,27 +7,32 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 
-public class StateSystem extends EntitySystem
+public class PhysicsSystem extends EntitySystem
 {
 	private ImmutableArray<Entity> entities;
 	
-	private ComponentMapper<StateComponent> sm = ComponentMapper.getFor(StateComponent.class);
+	private ComponentMapper<PhysicsComponent> pm = ComponentMapper.getFor(PhysicsComponent.class);
 	private ComponentMapper<VelocityComponent> vm = ComponentMapper.getFor(VelocityComponent.class);
 	
-	public StateSystem(){}
-
+	public PhysicsSystem(){}
+	
 	public void addedToEngine(Engine engine)
 	{
-		entities = engine.getEntitiesFor(Family.all(StateComponent.class).get());
+		entities = engine.getEntitiesFor(Family.all(VelocityComponent.class,PhysicsComponent.class).get());
 	}
 	
 	public void update(float deltatime)
 	{
+	
 		for(Entity e:entities)
 		{
-			StateComponent sc = sm.get(e);
-			VelocityComponent vc = vm.get(e);
+			VelocityComponent vc = e.getComponent(VelocityComponent.class);
+			PhysicsComponent pc = e.getComponent(PhysicsComponent.class);
+			
+			vc.vx = vc.vx + (pc.ax*deltatime);
+			vc.vy = vc.vy + (pc.ay*deltatime);
 		}
+		
 	}
 	
 }
